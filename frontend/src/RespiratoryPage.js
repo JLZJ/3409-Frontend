@@ -31,9 +31,17 @@ function RespiratoryPage() {
         )
             .then((response) => response.json())
             .then((result) => {
+                let statement = '';
+                if (result.outcome=='Healthy'){
+                    statement = "Patient has a healthy respiratory system"
+                } else if (result.outcome=="Respiratory Tract Infection") {
+                    statement = "Patient is likely to have a common respiratory tract infection"
+                } else {
+                    statement = "Patient is likely to have a chronic obstructive pulmonary disease"
+                }
                 // console.log('Success:', result.outcome);
                 changeQueryingState(false);
-                navigate('/results', { state: {prevPage: 'Respiratory Tract Infection', result: 'Patient may be suffering from '+result.outcome} });
+                navigate('/results', { state: {prevPage: 'Respiratory Tract Infection', result: statement} });
             })
             .catch((error) => {
                 // console.error('Error:', error);
