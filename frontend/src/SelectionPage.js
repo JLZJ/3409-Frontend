@@ -9,7 +9,7 @@ import rti from "./rti.png";
 
 function SelectionPage() {
     return (
-        <div style={{display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent:'space-around', alignContent:'space-between', height:'45vh', width:'65vh', paddingTop:'10vh'}}>
+        <div style={{display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent:'space-around', alignContent:'space-between', height:'45vh', width:'50vw', paddingTop:'2vh'}}>
             <SelectSurvey name="Diabetes" imgLink={diabetes} pathLink={'/diabetes'}/>
             <SelectSurvey name="Coronary Artery Disease" imgLink={coronary} pathLink={'/coronary'}/>
             <SelectSurvey name="Stroke" imgLink={stroke} pathLink={'/stroke'}/>

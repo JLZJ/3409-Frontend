@@ -18,30 +18,27 @@ function RespiratoryPage() {
                 return;
             }
         }
-        // values['name'] = values.file.name
+        changeQueryingState(true);
         let formData = new FormData();
-        formData.append(
-            "file",
-            values.file
-        );
-        console.log(values)
+        formData.append( "file", values.file, values.file.name)
+        console.log(formData)
         fetch(
             'http://127.0.0.1:5000/predict/respiratory',
             {
                 method: 'POST',
-                body: values,
+                body: formData,
             }
         )
             .then((response) => response.json())
             .then((result) => {
-                console.log('Success:', result.outcome);
+                // console.log('Success:', result.outcome);
                 changeQueryingState(false);
-                navigate('/results', { state: {prevPage: 'Respiratory', result: result.outcome} });
+                navigate('/results', { state: {prevPage: 'Respiratory Tract Infection', result: 'Patient may be suffering from '+result.outcome} });
             })
             .catch((error) => {
-                console.error('Error:', error);
+                // console.error('Error:', error);
                 changeQueryingState(false);
-                navigate('/results', { state: {prevPage: 'Respiratory', result: "Something went wrong... Try again later"} });
+                navigate('/results', { state: {prevPage: 'Respiratory Tract Infection', result: "Something went wrong... Try again later"} });
             });
     }
 

@@ -17,16 +17,25 @@ function PneumoniaPage() {
                 return;
             }
         }
+        changeQueryingState(true);
+        let formData = new FormData();
+        formData.append( "file", values.file, values.file.name)
         fetch(
-            'https://ai-doctor-3409.herokuapp.com/predict/pneumonia',
+            'http://127.0.0.1:5000/predict/pneumonia',
             {
                 method: 'POST',
-                body: values,
+                body: formData,
             }
         )
             .then((response) => response.json())
             .then((result) => {
-                console.log('Success:', result.outcome);
+                let statement = '';
+                if (result.outcome=='Absent'){
+                    statement = "Patient does not have a case of pneumonia"
+                } else {
+                    statement = "Patient has pneumonia"
+                }
+                // console.log('Success:', result.outcome);
                 changeQueryingState(false);
                 navigate('/results', { state: {prevPage: 'Pneumonia', result: result.outcome} });
             })
@@ -40,7 +49,7 @@ function PneumoniaPage() {
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <div className="PneumoniaPage" style={{height:'75vh'}}>
-                <ImageUploader name='pneumonia' control={control} register={register}/>
+                <ImageUploader name='file' control={control} register={register}/>
                 <Submit/>
                 <ErrorMessage error={error}/>
                 <AwaitResults waiting={query} />
