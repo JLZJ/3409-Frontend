@@ -23,9 +23,15 @@ function CoronaryPage() {
         )
             .then((response)=> response.json())
             .then((result) => {
-                console.log('Success:', result.outcome);
+                let statement = '';
+                if (result.outcome=='Absent'){
+                    statement = "Patient's is unlikely to have coronary artery disease"
+                } else {
+                    statement = "Patient is likely to have coronary artery disease"
+                }
+                // console.log('Success:', result.outcome);
                 changeQueryingState(false);
-                navigate('/results', { state: {prevPage: 'Coronary', result: result.outcome} });
+                navigate('/results', { state: {prevPage: 'Coronary Artery Disease', result: statement} });
             })
             .catch((error) => {
                 console.error('Error:', error);

@@ -13,17 +13,45 @@ import loading from './loading.svg'
 // selection icons for survey
 export const SelectSurvey =({name, imgLink, pathLink}) => {
     let navigate = useNavigate();
+    const { height, width } = useWindowDimensions();
     const [bgColour, setBgColour] = useState("#f2f2f2")
     const [txtColour, setTxtColour] = useState("#f2f2f2")
     return(
-        <div onClick={()=>navigate(pathLink)} style={{cursor:'pointer', width: '17vh',backgroundColor:bgColour, borderRadius: '10px', paddingTop:'10px', paddingBottom:'10px', boxShadow: '2px 3px 2px lightgrey' }} onMouseEnter={() =>{setBgColour("#81a9e5"); setTxtColour("#f7f7fd")} } onMouseLeave={() => {setBgColour("#f2f2f2"); setTxtColour("#f2f2f2")}}>
-            <img src={imgLink} onClick={()=>navigate(pathLink)} style={{width:'15vh', height:'15vh', borderRadius: '10px',backgroundColor:txtColour, }}/>
-            <div style={{ marginLeft:'4px', marginRight:'4px', height:'4vh', display:'flex', flexDirection:'row', alignItems:'center', justifyContent:'center'}} >
-                <text style={{width:'15vh'}}>{name}</text>
+        <div onClick={()=>navigate(pathLink)} style={{cursor:'pointer', width: '14vw',backgroundColor:bgColour, borderRadius: '10px', paddingTop:'10px', paddingBottom:'10px', boxShadow: '2px 3px 2px lightgrey', marginTop:'3vh', marginBottom:'2vh' }} onMouseEnter={() =>{setBgColour("#81a9e5"); setTxtColour("#f7f7fd")} } onMouseLeave={() => {setBgColour("#f2f2f2"); setTxtColour("#f2f2f2")}}>
+            <img src={imgLink} onClick={()=>navigate(pathLink)} style={{width:'12vw', minHeight:'12vw',maxHeight:'13vh', borderRadius: '10px',backgroundColor:txtColour, }}/>
+            {2*width>height?
+                <div style={{width:'14vw', marginLeft:'4px', marginRight:'4px', height:'5vh', display:'flex', flexDirection:'row', alignItems:'center', justifyContent:'center'}} >
+                    <text style={{width:'14vw', fontSize:'100%'}}>{name}</text>
+                </div>:
+                <div/>}
+        </div>
+        )
+}
+
+// Results
+export const Result =({results}) => {
+    return(
+        <div style={{width: '30vw', minWidth:'225px', borderRadius: '10px', paddingTop:'10px', paddingBottom:'10px', boxShadow: '2px 3px 2px lightgrey', backgroundColor:'#f2f2f2', display:'flex', justifyContent:'center' }}>
+            <div style={{ marginLeft:'4px', marginRight:'4px', minHeight:'4vh', width:'17vw', display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center'}} >
+                <text style={{width:'15vw', marginBottom:'5px', fontWeight:'bold', textDecoration:'underline'}}>Prediction result:</text>
+                <text>{" "}</text>
+                <text style={{width:'15vw', marginTop:'5px'}}>{results}</text>
             </div>
 
         </div>
-        )
+    )
+}
+
+// Additional comments from doctor
+export const DoctorComments =({}) => {
+    return(
+        <div style={{width: '30vw', minWidth:'225px', borderRadius: '10px', paddingTop:'10px', paddingBottom:'10px', boxShadow: '2px 3px 2px lightgrey', backgroundColor:'#f2f2f2', display:'flex', justifyContent:'center', marginTop:'15px', }}>
+            <div style={{ minHeight:'4vh', width:'28vw', }} >
+                <TextField fullWidth multiline minRows={4} label="Additional doctor's comments" style={{width:'28vw', backgroundColor:'#f2f2f2'}}/>
+            </div>
+
+        </div>
+    )
 }
 
 // Image Uploader
@@ -43,7 +71,7 @@ export const ImageUploader =({name, control, register}) => {
         control={control}
         defaultValue={null}
         render={({ field: { onChange, value } }) => (
-            <div style={{border:'2px grey dashed', borderRadius:'10px', width: '30vw', minHeight:'10vh', display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center'}}>
+            <div style={{border:'2px grey dashed', borderRadius:'10px', width: '30vw', minWidth: '225px', minHeight:'10vh', display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center'}}>
                 <Button
                     onClick={()=>document.getElementById(name).click()}
                     variant="outlined"
@@ -80,7 +108,7 @@ export const AudioUploader =({name, control, register}) => {
         control={control}
         defaultValue={null}
         render={({ field: { onChange, value } }) => (
-            <div style={{border:'2px grey dashed', borderRadius:'10px', width: '30vw', minHeight:'10vh', display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center'}}>
+            <div style={{border:'2px grey dashed', borderRadius:'10px', width: '30vw', minWidth: '225px', minHeight:'10vh', display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center'}}>
                 <Button
                     onClick={()=>document.getElementById(name).click()}
                     variant="outlined"
@@ -344,4 +372,29 @@ export const AwaitResults = (waiting) =>  {
             </Modal>
         </div>
     );
+}
+
+function getWindowDimensions() {
+    const { innerWidth: width, innerHeight: height } = window;
+    return {
+        width,
+        height
+    };
+}
+
+function useWindowDimensions() {
+    const [windowDimensions, setWindowDimensions] = useState(
+        getWindowDimensions()
+    );
+
+    useEffect(() => {
+        function handleResize() {
+            setWindowDimensions(getWindowDimensions());
+        }
+
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
+    return windowDimensions;
 }

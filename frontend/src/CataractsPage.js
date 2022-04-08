@@ -17,22 +17,30 @@ function CataractsPage() {
                 return;
             }
         }
-        console.log(values);
+        changeQueryingState(true);
+        let formData = new FormData();
+        formData.append( "file", values.file, values.file.name)
         fetch(
-            'http://127.0.0.1:5000/predict/cataract?',
+            'http://127.0.0.1:5000/predict/cataract',
             {
                 method: 'POST',
-                body: values,
+                body: formData,
             }
         )
             .then((response) => response.json())
             .then((result) => {
-                console.log('Success:', result.outcome);
+                // console.log('Success:', result.outcome);
+                let statement = '';
+                if (result.outcome=='Absent'){
+                    statement = "Patient's eye looks unremarkable, unlikely to have cataracts"
+                } else {
+                    statement = "Abnormality detected, patient is likely to have cataracts"
+                }
                 changeQueryingState(false);
-                navigate('/results', { state: {prevPage: 'Cataracts', result: result.outcome} });
+                navigate('/results', { state: {prevPage: 'Cataracts', result: statement} });
             })
             .catch((error) => {
-                console.error('Error:', error);
+                // console.error('Error:', error);
                 changeQueryingState(false);
                 navigate('/results', { state: {prevPage: 'Cataracts', result: "Something went wrong... Try again later"} });
             });

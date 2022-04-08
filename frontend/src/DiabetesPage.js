@@ -30,9 +30,15 @@ function DiabetesPage() {
         )
             .then((response)=> response.json())
             .then((result) => {
-                console.log('Success:', result.outcome);
+                let statement = '';
+                if (result.outcome=='Absent'){
+                    statement = "Patient's is unlikely to develop diabetes"
+                } else {
+                    statement = "Patient is likely to develop diabetes"
+                }
+                // console.log('Success:', result.outcome);
                 changeQueryingState(false);
-                navigate('/results', { state: {prevPage: 'Diabetes', result: result.outcome} });
+                navigate('/results', { state: {prevPage: 'Diabetes', result: statement} });
             })
             .catch((error) => {
                 console.error('Error:', error);

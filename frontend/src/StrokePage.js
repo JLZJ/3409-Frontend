@@ -23,9 +23,15 @@ function StrokePage() {
         )
             .then((response)=> response.json())
             .then((result) => {
-                console.log('Success:', result.outcome);
+                let statement = '';
+                if (result.outcome=='Absent'){
+                    statement = "Patient does not show signs of a stroke"
+                } else {
+                    statement = "Patient is showing signs of stroke"
+                }
+                // console.log('Success:', result.outcome);
                 changeQueryingState(false);
-                navigate('/results', { state: {prevPage: 'Stroke', result: result.outcome} });
+                navigate('/results', { state: {prevPage: 'Stroke', result: statement} });
             })
             .catch((error) => {
                 console.error('Error:', error);
