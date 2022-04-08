@@ -16,11 +16,11 @@ export const SelectSurvey =({name, imgLink, pathLink}) => {
     const [bgColour, setBgColour] = useState("#f2f2f2")
     const [txtColour, setTxtColour] = useState("#f2f2f2")
     return(
-        <div onClick={()=>navigate(pathLink)} style={{cursor:'pointer', width: '14vw',backgroundColor:bgColour, borderRadius: '10px', paddingTop:'10px', paddingBottom:'10px', boxShadow: '2px 3px 2px lightgrey', marginTop:'3vh', marginBottom:'2vh' }} onMouseEnter={() =>{setBgColour("#81a9e5"); setTxtColour("#f7f7fd")} } onMouseLeave={() => {setBgColour("#f2f2f2"); setTxtColour("#f2f2f2")}}>
-            <img src={imgLink} alt="survey" onClick={()=>navigate(pathLink)} style={{width:'12vw', minHeight:'12vw',maxHeight:'13vh', borderRadius: '10px',backgroundColor:txtColour, }}/>
-            {2*width>height?
-                <div style={{width:'14vw', marginLeft:'4px', marginRight:'4px', height:'5vh', display:'flex', flexDirection:'row', alignItems:'center', justifyContent:'center'}} >
-                    <text style={{width:'14vw', fontSize:'100%'}}>{name}</text>
+        <div onClick={()=>navigate(pathLink)} style={{cursor:'pointer', width: '14vw', minWidth:'52px',backgroundColor:bgColour, borderRadius: '10px', paddingTop:'10px', paddingBottom:'10px', boxShadow: '2px 3px 2px lightgrey', marginTop:'3vh', marginBottom:'2vh' }} onMouseEnter={() =>{setBgColour("#81a9e5"); setTxtColour("#f7f7fd")} } onMouseLeave={() => {setBgColour("#f2f2f2"); setTxtColour("#f2f2f2")}}>
+            <img src={imgLink} alt="survey" onClick={()=>navigate(pathLink)} style={{width:'12vw', minWidth:'42px', minHeight:'12vw',maxHeight:'13vh', borderRadius: '10px',backgroundColor:txtColour, }}/>
+            {1.75*width>height?
+                <div style={{maxWidth:'14vw', minWidth:'44px', marginLeft:'4px', marginRight:'4px', height:'5vh', display:'flex', flexDirection:'row', alignItems:'center', justifyContent:'center'}} >
+                    <text style={{maxWidth:'14vw',minWidth:'42px',  fontSize:'90%'}}>{name}</text>
                 </div>:
                 <div/>}
         </div>
