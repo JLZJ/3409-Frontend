@@ -17,7 +17,7 @@ export const SelectSurvey =({name, imgLink, pathLink}) => {
     const [txtColour, setTxtColour] = useState("#f2f2f2")
     return(
         <div onClick={()=>navigate(pathLink)} style={{cursor:'pointer', width: '14vw',backgroundColor:bgColour, borderRadius: '10px', paddingTop:'10px', paddingBottom:'10px', boxShadow: '2px 3px 2px lightgrey', marginTop:'3vh', marginBottom:'2vh' }} onMouseEnter={() =>{setBgColour("#81a9e5"); setTxtColour("#f7f7fd")} } onMouseLeave={() => {setBgColour("#f2f2f2"); setTxtColour("#f2f2f2")}}>
-            <img src={imgLink} onClick={()=>navigate(pathLink)} style={{width:'12vw', minHeight:'12vw',maxHeight:'13vh', borderRadius: '10px',backgroundColor:txtColour, }}/>
+            <img src={imgLink} alt="survey" onClick={()=>navigate(pathLink)} style={{width:'12vw', minHeight:'12vw',maxHeight:'13vh', borderRadius: '10px',backgroundColor:txtColour, }}/>
             {2*width>height?
                 <div style={{width:'14vw', marginLeft:'4px', marginRight:'4px', height:'5vh', display:'flex', flexDirection:'row', alignItems:'center', justifyContent:'center'}} >
                     <text style={{width:'14vw', fontSize:'100%'}}>{name}</text>
@@ -82,7 +82,7 @@ export const ImageUploader =({name, control, register}) => {
                     value = image.target.files[0];
                 }}
                        accept=".png,.jpg,.jpeg" />
-                <img src={ getImgURL(selectedImage) } style={{maxHeight:'45vh', maxWidth:'29vw', marginTop:'5px', borderRadius:'10px',}} />
+                <img src={ getImgURL(selectedImage) } alt='Upload' style={{maxHeight:'45vh', maxWidth:'29vw', marginTop:'5px', borderRadius:'10px',}} />
                 <text style={{fontStyle:'italic', fontSize:'80%', marginTop:'5px', marginBottom:'5px'}}>*only .png, .jpg, .jpeg files are accepted</text>
             </div>
         )}
@@ -94,8 +94,8 @@ export const ImageUploader =({name, control, register}) => {
 export const AudioUploader =({name, control, register}) => {
     const [selectedAudio, setAudio] = useState(null);
 
-    const getAudioURL = (img) => {
-        if (img) {
+    const getAudioURL = (aud) => {
+        if (aud) {
             return URL.createObjectURL(selectedAudio)
         } else {
             return ''
@@ -181,7 +181,7 @@ export const FormNumberInput = ({name, question, control, register}) => {
         render={({ field: { onChange, value } }) => (
             <div style={{width:'30vw', flexDirection: 'column', display:'flex'}}>
                 <a style={{width:'30vw', marginBottom:'12px', marginTop:'20px', textAlign:'left'}}>{question}</a>
-                <TextField onChange={onChange} value={value} id="number-input"  label="Value" type="text" inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }} style={{marginBottom:'10px'}}/>
+                <TextField onChange={onChange} value={value} id="number-input"  label="Value" type="text" inputProps={{ inputMode: 'numeric', pattern: '[0-9]+([,.][0-9]+)?$' }} style={{marginBottom:'10px'}}/>
             </div>
         )}
         {...register(name)}
