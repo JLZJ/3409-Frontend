@@ -1,7 +1,7 @@
 import './App.css';
 import './SelectionPage'
 import logo from "./logo.png";
-import {BrowserRouter as Router, Route, Link, Routes, useNavigate, useLocation, Navigate,} from "react-router-dom";
+import {Route, Routes, useNavigate, useLocation, Navigate,} from "react-router-dom";
 import SelectionPage from "./SelectionPage";
 import DiabetesPage from "./DiabetesPage";
 import CoronaryPage from "./CoronaryPage";

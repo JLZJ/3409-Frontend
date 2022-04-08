@@ -4,7 +4,7 @@ import {useForm} from "react-hook-form";
 import {useNavigate} from "react-router-dom";
 
 function CoronaryPage() {
-    const { register, handleSubmit, control, getValues, reset } = useForm();
+    const { register, handleSubmit, control, reset } = useForm();
     const [error, showError] = useState(false);
     const [query, changeQueryingState] = useState(false);
     let navigate = useNavigate();
@@ -18,14 +18,14 @@ function CoronaryPage() {
         }
         changeQueryingState(true);
         fetch(
-            'http://127.0.0.1:5000/predict/coronary?' + new URLSearchParams(values),
+            'http://ec2-54-255-154-230.ap-southeast-1.compute.amazonaws.com:5000/predict/coronary?' + new URLSearchParams(values),
             { method: 'GET', }
         )
             .then((response)=> response.json())
             .then((result) => {
                 let statement = '';
-                if (result.outcome=='Absent'){
-                    statement = "Patient's is unlikely to have coronary artery disease"
+                if (result.outcome==='Absent'){
+                    statement = "Patient is unlikely to have coronary artery disease"
                 } else {
                     statement = "Patient is likely to have coronary artery disease"
                 }

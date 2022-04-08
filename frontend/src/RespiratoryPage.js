@@ -4,7 +4,7 @@ import {useForm} from "react-hook-form";
 import {useNavigate} from "react-router-dom";
 
 function RespiratoryPage() {
-    const { register, handleSubmit, control, getValues, reset } = useForm();
+    const { register, handleSubmit, control, } = useForm();
     const [error, showError] = useState(false);
     const [query, changeQueryingState] = useState(false);
     let navigate = useNavigate();
@@ -23,7 +23,7 @@ function RespiratoryPage() {
         formData.append( "file", values.file, values.file.name)
         console.log(formData)
         fetch(
-            'http://127.0.0.1:5000/predict/respiratory',
+            'http://ec2-54-255-154-230.ap-southeast-1.compute.amazonaws.com:5000/predict/respiratory',
             {
                 method: 'POST',
                 body: formData,
@@ -32,9 +32,9 @@ function RespiratoryPage() {
             .then((response) => response.json())
             .then((result) => {
                 let statement = '';
-                if (result.outcome=='Healthy'){
+                if (result.outcome==='Healthy'){
                     statement = "Patient has a healthy respiratory system"
-                } else if (result.outcome=="Respiratory Tract Infection") {
+                } else if (result.outcome==="Respiratory Tract Infection") {
                     statement = "Patient is likely to have a common respiratory tract infection"
                 } else {
                     statement = "Patient is likely to have a chronic obstructive pulmonary disease"

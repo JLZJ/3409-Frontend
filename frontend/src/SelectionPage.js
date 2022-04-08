@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 import {SelectSurvey} from './Components'
 import stroke from "./stroke.png";
 import coronary from "./coronary.png";

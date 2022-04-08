@@ -4,7 +4,7 @@ import {useForm} from "react-hook-form";
 import {useNavigate} from "react-router-dom";
 
 function CataractsPage() {
-    const { register, handleSubmit, control, getValues, reset } = useForm();
+    const { register, handleSubmit, control, } = useForm();
     const [error, showError] = useState(false);
     const [query, changeQueryingState] = useState(false);
     let navigate = useNavigate();
@@ -21,7 +21,7 @@ function CataractsPage() {
         let formData = new FormData();
         formData.append( "file", values.file, values.file.name)
         fetch(
-            'http://127.0.0.1:5000/predict/cataract',
+            'http://ec2-54-255-154-230.ap-southeast-1.compute.amazonaws.com:5000/predict/cataract',
             {
                 method: 'POST',
                 body: formData,
@@ -31,7 +31,7 @@ function CataractsPage() {
             .then((result) => {
                 // console.log('Success:', result.outcome);
                 let statement = '';
-                if (result.outcome=='Absent'){
+                if (result.outcome==='Absent'){
                     statement = "Patient's eye looks unremarkable, unlikely to have cataracts"
                 } else {
                     statement = "Abnormality detected, patient is likely to have cataracts"

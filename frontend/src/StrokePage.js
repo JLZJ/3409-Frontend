@@ -4,7 +4,7 @@ import {useForm} from "react-hook-form";
 import {useNavigate} from "react-router-dom";
 
 function StrokePage() {
-    const { register, handleSubmit, control, getValues, reset } = useForm();
+    const { register, handleSubmit, control,  reset } = useForm();
     const [error, showError] = useState(false);
     const [query, changeQueryingState] = useState(false);
     let navigate = useNavigate();
@@ -18,13 +18,13 @@ function StrokePage() {
         }
         changeQueryingState(true);
         fetch(
-            'http://127.0.0.1:5000/predict/stroke?' + new URLSearchParams(values),
+            'http://ec2-54-255-154-230.ap-southeast-1.compute.amazonaws.com:5000/predict/stroke?' + new URLSearchParams(values),
             { method: 'GET', }
         )
             .then((response)=> response.json())
             .then((result) => {
                 let statement = '';
-                if (result.outcome=='Absent'){
+                if (result.outcome==='Absent'){
                     statement = "Patient does not show signs of a stroke"
                 } else {
                     statement = "Patient is showing signs of stroke"
