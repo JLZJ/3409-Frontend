@@ -21,7 +21,7 @@ function CataractsPage() {
         let formData = new FormData();
         formData.append( "file", values.file, values.file.name)
         fetch(
-            'http://aidoctor3409-env-1.eba-tdxhupka.ap-southeast-1.elasticbeanstalk.com:5000/predict/cataract',
+            'http://ai-doctor-3409.ap-southeast-1.elasticbeanstalk.com/predict/cataract',
             {
                 method: 'POST',
                 body: formData,

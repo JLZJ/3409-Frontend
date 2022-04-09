@@ -18,7 +18,7 @@ function CoronaryPage() {
         }
         changeQueryingState(true);
         fetch(
-            'http://aidoctor3409-env-1.eba-tdxhupka.ap-southeast-1.elasticbeanstalk.com:5000/predict/coronary?' + new URLSearchParams(values),
+            'http://ai-doctor-3409.ap-southeast-1.elasticbeanstalk.com/predict/coronary?' + new URLSearchParams(values),
             { method: 'GET', }
         )
             .then((response)=> response.json())

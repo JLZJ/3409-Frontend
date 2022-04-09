@@ -21,7 +21,7 @@ function DiabetesPage() {
         }
         changeQueryingState(true);
         fetch(
-            'http://aidoctor3409-env-1.eba-tdxhupka.ap-southeast-1.elasticbeanstalk.com:5000/predict/diabetes?' + new URLSearchParams(values),
+            'http://ai-doctor-3409.ap-southeast-1.elasticbeanstalk.com/predict/diabetes?' + new URLSearchParams(values),
             { method: 'GET', }
         )
             .then((response)=> response.json())
