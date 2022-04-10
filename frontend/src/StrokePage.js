@@ -1,7 +1,7 @@
-import React, {useState} from 'react'
-import {FormInputDropdown, FormNumberInput, ErrorMessage, SubmitAndReset, AwaitResults} from './Components'
-import {useForm} from "react-hook-form";
-import {useNavigate} from "react-router-dom";
+import React, { useState } from 'react';
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { AwaitResults, ErrorMessage, FormInputDropdown, FormNumberInput, SubmitAndReset } from './Components';
 
 function StrokePage() {
     const { register, handleSubmit, control,  reset } = useForm();
@@ -18,7 +18,7 @@ function StrokePage() {
         }
         changeQueryingState(true);
         fetch(
-            'http://ec2-54-255-154-230.ap-southeast-1.compute.amazonaws.com:5000/predict/stroke?' + new URLSearchParams(values),
+            'http://ai-doctor-3409.ap-southeast-1.elasticbeanstalk.com/predict/stroke?' + new URLSearchParams(values),
             { method: 'GET', }
         )
             .then((response)=> response.json())

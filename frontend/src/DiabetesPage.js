@@ -1,14 +1,10 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react';
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import {
-    FormInputDropdown,
-    FormNumberInput,
-    ErrorMessage,
-    SubmitAndReset,
-    ScaleSliderInput,
-    AwaitResults
-} from './Components'
-import {useForm} from "react-hook-form";
-import {useNavigate} from "react-router-dom";
+    AwaitResults, ErrorMessage, FormInputDropdown,
+    FormNumberInput, ScaleSliderInput, SubmitAndReset
+} from './Components';
 
 function DiabetesPage() {
     const { register, handleSubmit, control, reset } = useForm();
@@ -25,7 +21,7 @@ function DiabetesPage() {
         }
         changeQueryingState(true);
         fetch(
-            'http://ec2-54-255-154-230.ap-southeast-1.compute.amazonaws.com:5000/predict/diabetes?' + new URLSearchParams(values),
+            'http://ai-doctor-3409.ap-southeast-1.elasticbeanstalk.com/predict/diabetes?' + new URLSearchParams(values),
             { method: 'GET', }
         )
             .then((response)=> response.json())

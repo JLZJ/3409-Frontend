@@ -1,7 +1,7 @@
-import React, {useState} from 'react'
-import {ErrorMessage, Submit, AudioUploader, AwaitResults} from './Components'
-import {useForm} from "react-hook-form";
-import {useNavigate} from "react-router-dom";
+import React, { useState } from 'react';
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { AudioUploader, AwaitResults, ErrorMessage, Submit } from './Components';
 
 function RespiratoryPage() {
     const { register, handleSubmit, control, } = useForm();
@@ -23,7 +23,7 @@ function RespiratoryPage() {
         formData.append( "file", values.file, values.file.name)
         console.log(formData)
         fetch(
-            'http://ec2-54-255-154-230.ap-southeast-1.compute.amazonaws.com:5000/predict/respiratory',
+            'http://ai-doctor-3409.ap-southeast-1.elasticbeanstalk.com/predict/respiratory',
             {
                 method: 'POST',
                 body: formData,

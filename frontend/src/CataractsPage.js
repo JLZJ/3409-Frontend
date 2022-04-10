@@ -1,7 +1,7 @@
-import React, {useState} from 'react'
-import {ErrorMessage, Submit, ImageUploader, AwaitResults} from './Components'
-import {useForm} from "react-hook-form";
-import {useNavigate} from "react-router-dom";
+import React, { useState } from 'react';
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { AwaitResults, ErrorMessage, ImageUploader, Submit } from './Components';
 
 function CataractsPage() {
     const { register, handleSubmit, control, } = useForm();
@@ -21,7 +21,7 @@ function CataractsPage() {
         let formData = new FormData();
         formData.append( "file", values.file, values.file.name)
         fetch(
-            'http://ec2-54-255-154-230.ap-southeast-1.compute.amazonaws.com:5000/predict/cataract',
+            'http://ai-doctor-3409.ap-southeast-1.elasticbeanstalk.com/predict/cataract',
             {
                 method: 'POST',
                 body: formData,

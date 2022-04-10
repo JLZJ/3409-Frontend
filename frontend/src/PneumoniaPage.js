@@ -1,7 +1,7 @@
-import React, {useState} from 'react'
-import {ErrorMessage, Submit, ImageUploader, AwaitResults} from './Components'
-import {useForm} from "react-hook-form";
-import {useNavigate} from "react-router-dom";
+import React, { useState } from 'react';
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { AwaitResults, ErrorMessage, ImageUploader, Submit } from './Components';
 
 function PneumoniaPage() {
     const { register, handleSubmit, control, } = useForm();
@@ -21,7 +21,7 @@ function PneumoniaPage() {
         let formData = new FormData();
         formData.append( "file", values.file, values.file.name)
         fetch(
-            'http://ec2-54-255-154-230.ap-southeast-1.compute.amazonaws.com:5000/predict/pneumonia',
+            'http://ai-doctor-3409.ap-southeast-1.elasticbeanstalk.com/predict/pneumonia',
             {
                 method: 'POST',
                 body: formData,
