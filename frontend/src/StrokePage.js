@@ -18,7 +18,7 @@ function StrokePage() {
         }
         changeQueryingState(true);
         fetch(
-            'http://ec2-54-255-154-230.ap-southeast-1.compute.amazonaws.com:5000/predict/stroke?' + new URLSearchParams(values),
+            'http://127.0.0.1:5000/predict/stroke?' + new URLSearchParams(values),
             { method: 'GET', }
         )
             .then((response)=> response.json())

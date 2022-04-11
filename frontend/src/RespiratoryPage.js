@@ -23,7 +23,7 @@ function RespiratoryPage() {
         formData.append( "file", values.file, values.file.name)
         console.log(formData)
         fetch(
-            'http://ec2-54-255-154-230.ap-southeast-1.compute.amazonaws.com:5000/predict/respiratory',
+            'http://127.0.0.1:5000/predict/respiratory',
             {
                 method: 'POST',
                 body: formData,

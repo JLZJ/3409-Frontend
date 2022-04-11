@@ -121,7 +121,7 @@ export const AudioUploader =({name, control, register}) => {
                     } else if (audio.target.files[0].size<200000) {
                         alert('File should be longer than 5 seconds, please upload another file.')
                         return
-                    } else if (audio.target.files[0].size>1500000) {
+                    } else if (audio.target.files[0].size>50000000) {
                         alert('File should not be longer than 30 seconds, please upload another file.')
                         return
                     } else {
